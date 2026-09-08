@@ -6,10 +6,12 @@ This file defines how Codex and any delegated subagents must work inside this re
 
 1. The user's current explicit instruction.
 2. `MASTER_PROMPT.md` — product and engineering constitution.
-3. `docs/PROJECT_STATE.md` — current factual phase/state once it exists.
-4. This `AGENTS.md` — repository-wide operating rules.
-5. `CODEX.md` — reusable workflow conventions and command-like prompts.
-6. More-specific nested `AGENTS.md` files, when they do not conflict with higher-priority product rules.
+3. This root `AGENTS.md` — repository-wide operating rules.
+4. More-specific nested `AGENTS.md` files, when they do not conflict with higher-priority product rules.
+5. `docs/PROJECT_STATE.md` — current factual implementation/phase state once it exists.
+6. `CODEX.md` — reusable workflow conventions and command-like prompts.
+
+`docs/PROJECT_STATE.md` is authoritative for factual project status (current phase, verified commands, blockers, evidence), but it does not override product policy or repository operating rules.
 
 If instructions conflict, identify the conflict and follow the highest-priority instruction. Do not silently reinterpret a founder-approved product decision.
 
