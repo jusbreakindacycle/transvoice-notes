@@ -997,7 +997,8 @@ When evidence is missing:
 The assistant must not fabricate:
 - names;
 - dates;
-- deadlines;- responsibilities;
+- deadlines;
+- responsibilities;
 - decisions;
 - quotes.
 
@@ -2257,6 +2258,7 @@ Maintain:
 ```text
 README.md
 MASTER_PROMPT.md
+AGENTS.md
 CODEX.md
 
 docs/
@@ -2275,6 +2277,7 @@ docs/
   COMPETITIVE_BENCHMARK.md
   CLOUD_ARCHITECTURE.md
   RELEASE_CHECKLIST.md
+  TECH_STACK.md
 ```
 
 Create additional docs only when they solve a real documentation problem.
@@ -2502,11 +2505,13 @@ Exit:
 ## PHASE 2 — SPEECH + AUDIO FEASIBILITY SPIKE
 
 Objective:
-Answer the existential product question before building too much:
+Answer the existential speech-product question before building too much:
 
-> Can the chosen on-device pipeline provide useful English/Filipino/Taglish behavior on target devices without compromising recording?
+> Can a candidate on-device speech pipeline provide useful English/Filipino/Taglish Live Draft and Final Pass behavior within a resource envelope compatible with the recording-first architecture?
 
 Build disposable/minimal spike code if necessary.
+
+This phase is a speech/model/native-integration feasibility gate. It does **not** prove that the future production recording engine and live transcription can safely coexist for long sessions, backgrounding, screen lock, process interruption, or 60-minute use. Those combined production claims require the production recording engine and must be validated later in Phase 6 and Phase 12.
 
 Test:
 - candidate whisper.cpp models;
@@ -2530,8 +2535,12 @@ Exit:
   - FEASIBLE;
   - FEASIBLE WITH LIMITATIONS;
   - NOT YET FEASIBLE;
-- documented evidence;
-- recommended device/model strategy.
+- documented speech/model evidence;
+- preliminary resource envelope;
+- recommended device/model strategy;
+- explicit list of production coexistence claims that remain unverified until Phase 6/12.
+
+Do not describe Phase 2 as proof of production recording reliability.
 
 If not feasible, revise architecture honestly.
 
@@ -2615,7 +2624,12 @@ Tasks:
 - source segments;
 - timestamps;
 - user edit;
-- capability profiles.
+- capability profiles;
+- bounded speech-queue integration with the production recording engine;
+- verify that transcription backpressure cannot block or corrupt authoritative audio writing;
+- initial production coexistence tests on available physical devices.
+
+Phase 6 may validate short/representative recording + transcription coexistence, but long-session, background, interruption, battery, and thermal reliability claims remain for Phase 12.
 
 ---
 
@@ -2752,13 +2766,17 @@ Prepare:
 One phase at a time.
 
 Before editing:
-1. read this file;
-2. read `docs/PROJECT_STATE.md`;
+1. read `MASTER_PROMPT.md`, `AGENTS.md`, and `CODEX.md` completely;
+2. read `docs/PROJECT_STATE.md` if it exists;
 3. inspect repository;
-4. state phase objective;
-5. state expected changed/new files;
-6. state tests;
-7. state privacy/security/performance implications.
+4. state the active goal and observable success criteria;
+5. state phase objective;
+6. state expected changed/new files;
+7. state tests;
+8. state privacy/security/performance implications;
+9. use the `/scope-mvp` reasoning contract before substantial new scope;
+10. delegate risky/cross-cutting review when useful;
+11. plan proportional `/verify` evidence and adversarial review for non-trivial changes.
 
 At end:
 
@@ -2855,9 +2873,22 @@ Codex must not:
 After this file is saved as `MASTER_PROMPT.md` in the repository, give Codex:
 
 ```text
-Read MASTER_PROMPT.md completely and treat it as the product and engineering constitution for TransVoice Notes.
+Read MASTER_PROMPT.md, AGENTS.md, and CODEX.md completely.
+
+Treat:
+- MASTER_PROMPT.md as the product and engineering constitution;
+- AGENTS.md as the repository-wide agent/delegation operating policy;
+- CODEX.md as the goal, scope, delegation, verification, adversarial-review, and phase workflow contract.
 
 Begin PHASE 0 only.
+
+Set one explicit Phase 0 goal with observable success criteria using the /goal convention from CODEX.md.
+
+Use /scope-mvp reasoning before introducing any substantial new dependency, abstraction, service, infrastructure, or feature.
+
+Delegate focused research/review to relevant subagents when it materially improves Phase 0 quality, while keeping the root agent responsible for final decisions and avoiding overlapping concurrent edits.
+
+Before declaring Phase 0 complete, run /verify-style evidence accounting and an adversarial review of the resulting architecture/documentation.
 
 Before editing, inspect the actual repository, Git state, current branch, remotes, commit history, files, environment, package/tooling state, Android tooling, Expo/EAS availability, and current limitations for iOS development from this environment.
 
@@ -2896,6 +2927,7 @@ During Phase 0, reconcile all architecture around these binding decisions:
 
 Create/update:
 README.md
+AGENTS.md
 CODEX.md
 docs/PRODUCT_SPEC.md
 docs/ARCHITECTURE.md
@@ -2938,9 +2970,15 @@ NEXT ALLOWED ACTION: RESOLVE BLOCKER — <description>
 For later sessions:
 
 ```text
-Read MASTER_PROMPT.md and docs/PROJECT_STATE.md completely.
+Read MASTER_PROMPT.md, AGENTS.md, CODEX.md, and docs/PROJECT_STATE.md completely.
+
+Treat MASTER_PROMPT.md as the product constitution, AGENTS.md as the agent operating policy, and CODEX.md as the execution workflow contract.
 
 Continue PHASE <NUMBER> only.
+
+Set one active /goal for the phase with observable success criteria.
+
+Use /scope-mvp before substantial new scope, /delegate when parallel specialist review materially improves quality, /verify before completion, and /adversarial-review for non-trivial changes.
 
 Inspect the current repository and Git state before editing.
 
